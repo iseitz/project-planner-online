@@ -1,0 +1,26 @@
+<h1> Add Your Project Here </h1>
+
+  <% if @errors %>
+    <h4> Errors: </h4>
+    <ul>
+      <% @errors.each do |error| %>
+    <li>  <%= error + "\n" %> </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+<form id="add_project" action="/projects" method="post">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="project[name]" value="<%= @project.name %>">
+  </div>
+
+  <div>
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="project[description]" value="<%= @project.description %>">
+  </div>
+
+  <input type="submit" value="Create Project">
+</form>
+
+<a href="/projects">Back to all projects</a>

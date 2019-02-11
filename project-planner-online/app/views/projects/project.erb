@@ -1,0 +1,50 @@
+<h1> Details of <%= @project.name %> Project </h1>
+
+
+
+<% if @project.description %>
+   <h4>Description of the project: </h4>
+    <p> <%= @project.description %> </p>
+<% end %>
+
+<h4> Memebers, working on the project: </h4>
+<ul>
+    <% @assignments.each do |assignment| %>
+        <% user_id = assignment.user_id %>
+        <% @users = User.all %>
+        <% @user = @users.find(user_id) %>
+
+    <li> <%= @user.first_name + " " + @user.last_name %>
+          <% if @user.email %>
+          (<%=@user.email %>)
+          <% end %>
+    </li>
+
+    <% end %>
+</ul>
+
+ <% if !@tasks.empty? %>
+ <h4> Tasks for the project: </h4>
+      <ul>
+          <% @tasks.each do |task| %>
+          <li> <%= task.name %> </li>
+
+                <% if task.user_id %>
+                    <% user_id = task.user_id %>
+                    <% @users = User.all %>
+                    <% @user = @users.find(user_id) %>
+                     Assigned to :
+                    <%= @user.first_name %>
+                    <%= @user.last_name %>
+
+                    <% if @user.email %>
+                      <%=@user.email %>
+                    <% end %>
+
+                <% end %>
+          <% end %>
+      </ul>
+<% end %>
+
+
+<a href="/projects"> Back to all projects </a>
